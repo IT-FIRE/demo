@@ -1,0 +1,203 @@
+<!-- 2015-04-20 -->
+<?php
+$TMP_FIELD_ARRAY = Array
+	(
+
+	);
+?>
+
+<?php if($xajax){$xajax->printjavascript("../xajax/");} ?>
+
+
+<script language=javascript>
+
+
+var is_can_add = false;
+
+	function check(isclick){
+		if(!is_can_add && !isclick) return false;
+		
+		<?php 
+		if($TMP_FIELD_ARRAY){ 
+			foreach($TMP_FIELD_ARRAY as $k => $v){
+		
+		?>
+		
+		if (document.getElementById("<?=$k?>").value==""  || document.getElementById("<?=$k?>").value==0){
+			alert("请填必填项[<?=$v[name]?>]");
+			<?php if($v[type] == 'text' || ($v[type] == 'area' && $v[html] == 0)){ ?>document.getElementById("<?=$k?>").focus();<?php } ?>
+			return false;
+		}
+
+		<?php 
+			}
+		}
+		?>
+	
+
+		is_can_add = true;
+		window.document.form1.submit.disabled = true;
+		document.form1.submit();
+		return true;
+	}
+
+</script>
+
+
+<script type="text/javascript">
+    <!--
+    
+	function SelectDate(obj){
+		result = window.showModalDialog('SelectDate.htm',obj.value,'help:no;status: no;dialogWidth=190px;dialogHeight=230px');
+		if (result!=null) { obj.value = result; }
+	}
+   // -->
+</script>
+
+
+<form action="wy_article_add.php" method="post"  enctype="multipart/form-data" name="form1"  onsubmit="return check(0);">
+<input TYPE="hidden" name="confirm" value="1">
+<table width="100%" align="center" border="0" cellspacing="0" cellpadding="0" class="tableoutline">
+
+	<tr class="firstalt" nowrap><td width="15%">所属会员id</td>
+	<td align=left><INPUT TYPE="text" NAME="uid" id="uid" VALUE="" SIZE="50" ><span id="span_uid"></span></td>
+	</tr>
+
+	<tr class="firstalt" nowrap><td width="15%">所属类型</td>
+	<td align=left><INPUT TYPE="text" NAME="type" id="type" VALUE="" SIZE="50" ><span id="span_type"></span></td>
+	</tr>
+
+	<tr class="firstalt" nowrap><td width="15%">所属分类</td>
+	<td align=left><span id='article_cat_html'><?=_select($_r[article_cat],'article_cat', $ARTICLE_CAT,'所属分类')?></span> &nbsp; <span id="span_article_cat"></span></td>
+	</tr>
+	<tr class="firstalt" nowrap><td width="15%">文章标题</td>
+	<td align=left><INPUT TYPE="text" NAME="title" id="title" VALUE="" SIZE="50" ><span id="span_title"></span></td>
+	</tr>
+
+	<tr class="firstalt" nowrap><td width="15%">文章内容</td>
+<!-- wx.2015/7/21.新编辑器.start -->
+	<!--<td align=left><textarea NAME="content" id="content" rows="10" cols="80"  style="WIDTH:600px;HEIGHT:500px;"><?=stripslashes($_r[content])?></textarea><span id="span_content"></span></td>-->
+<link href="templates/froala_editor/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link href="templates/froala_editor/css/froala_editor.min.css" rel="stylesheet" type="text/css">
+<link href="templates/froala_editor/css/themes/royal.css" rel="stylesheet" type="text/css">
+<style>
+section {
+	width: 80%;
+	height:100%;
+	margin: auto;
+	text-align: left;
+}
+</style>
+	<td align=left style="height:500px;">
+		<!--<textarea NAME="content" id="content" rows="10" cols="80"  style="WIDTH:600px;HEIGHT:500px;">-->
+		<!--<textarea NAME="content" id="content" id="eg-textarea" class="text-small">-->
+		<textarea NAME="content" id="content" class="text-small">
+
+		</textarea>
+		<span id="span_content"></span>
+	</td>
+<script src="templates/froala_editor/js/libs/jquery-1.11.1.min.js"></script>
+<script src="templates/froala_editor/js/froala_editor.min.js"></script>
+<!--[if lt IE 9]>
+<script src="templates/froala_editor/js/froala_editor_ie8.min.js"></script>
+<![endif]-->
+<script src="templates/froala_editor/js/plugins/tables.min.js"></script>
+<script src="templates/froala_editor/js/plugins/lists.min.js"></script>
+<script src="templates/froala_editor/js/plugins/colors.min.js"></script>
+<script src="templates/froala_editor/js/plugins/media_manager.min.js"></script>
+<script src="templates/froala_editor/js/plugins/font_family.min.js"></script>
+<script src="templates/froala_editor/js/plugins/font_size.min.js"></script>
+<script src="templates/froala_editor/js/plugins/block_styles.min.js"></script>
+<script src="templates/froala_editor/js/plugins/video.min.js"></script>
+<script>
+$(function(){
+	var win_ie_ver = parseFloat(navigator.appVersion.split("MSIE")[1]);
+	//if (win_ie_ver <= 8) {
+		//$('#edit').editable({inlineMode: true, alwaysBlank: true, height: 500, width:800});
+	//}else{
+		//$('#edit').editable({inlineMode: false, alwaysBlank: true, height: 500, width:900});
+	
+	//$('#edit').editable({
+	$('textarea#content').editable({
+		inlineMode: false, alwaysBlank: true, height: 500, width:900,
+		//language: "zh_cn",
+		imageUploadURL: 'http://sys.wy100.com/sys/ajax_bjq.php?tk=<?=$token;?>',//上传到本地服务器
+		//imageUploadParams: {id: "edit"},
+		imageDeleteURL: 'http://sys.wy100.com/sys/ajax_imgd.php?tk=<?=$token;?>',
+		imagesLoadURL: 'http://sys.wy100.com/sys/ajax_imgl.php?tk=<?=$token;?>'
+	}).on('editable.afterRemoveImage', function (e, editor, $img) {
+		// Set the image source to the image delete params. 
+		editor.options.imageDeleteParams = {src: $img.attr('src')};
+		// Make the delete request
+		//.editor.deleteImage($img);
+		editor.deleteImage($img);
+	});
+	//}
+});
+</script>
+<!-- wx.2015/7/21.新编辑器.end -->
+	</tr>
+
+	<tr class="firstalt" nowrap><td width="15%">文章标签</td>
+	<td align=left>
+	<select name="tag[]" size="6" multiple="multiple" id="tag">
+	<?
+	foreach($taglist as $v){
+	?>
+    <option value="<?=$v[id]?>" ><?=$v[name]?></option>
+	<?}?>
+   </select>
+<span id="span_tag"></span></td>
+	</tr>
+
+		<tr class="firstalt" nowrap><td width="15%">关键词</td>
+	<td align=left><INPUT TYPE="text" NAME="keys" id="keys" VALUE="" SIZE="50" ><span id="span_keys"></span></td>
+	</tr>
+
+		<tr class="firstalt" nowrap><td width="15%">是否置顶</td>
+	<td align=left><INPUT TYPE="checkbox" NAME="is_top" id="is_top" VALUE="1" >是<span id="span_is_top"></span></td>
+	</tr>
+
+		<tr class="firstalt" nowrap><td width="15%">是否隐藏</td>
+	<td align=left><INPUT TYPE="checkbox" NAME="is_hide" id="is_hide" VALUE="1" >是<span id="span_is_hide"></span></td>
+	</tr>
+
+	<tr class="firstalt" nowrap><td width="15%">图片标签(存放对应id)</td>
+	<td align=left><INPUT TYPE="text" NAME="photo_tag" id="photo_tag" VALUE="" SIZE="50" ><span id="span_photo_tag"></span></td>
+	</tr>
+
+	<tr class="firstalt" nowrap><td width="15%">审核状态</td>
+	<td align=left><span id='review_html'><?=_select($_r[review],'review', $REVIEW,'审核状态')?></span> &nbsp; <span id="span_review"></span></td>
+	</tr>
+	<tr class="firstalt" nowrap><td width="15%">浏览量</td>
+	<td align=left><INPUT TYPE="text" NAME="view" id="view" VALUE="" SIZE="50" ><span id="span_view"></span></td>
+	</tr>
+
+	<tr class="firstalt" nowrap><td width="15%">评论数</td>
+	<td align=left><INPUT TYPE="hidden" NAME="comment_num" id="comment_num" VALUE="0" SIZE="50" ><span id="span_comment_num"></span></td>
+	</tr>
+
+	<tr class="firstalt" nowrap><td width="15%">点赞数</td>
+	<td align=left><INPUT TYPE="text" NAME="praise_num" id="praise_num" VALUE="" SIZE="50" ><span id="span_praise_num"></span></td>
+	</tr>
+
+	<tr class="firstalt" nowrap><td width="15%">排序</td>
+	<td align=left><INPUT TYPE="text" NAME="sort_order" id="sort_order" VALUE="" SIZE="50" ><span id="span_sort_order"></span></td>
+	</tr>
+
+	<tr class="firstalt" nowrap><td width="15%">封面pic</td>
+	<td align=left><INPUT TYPE="text" NAME="face_pic" id="face_pic" VALUE="" title="http地址" SIZE=20>&nbsp;&nbsp;或者上传<INPUT TYPE="file" NAME="upload_file_name[1]"  id="face_pic"><span id="span_face_pic"></span></td>
+	</tr>
+
+
+
+<tr class="tbhead">
+<td colspan=3 align="center">
+
+ <input class="bginput" accesskey="s" type="submit" name="submit" value=" 提交 "  onclick=" check(1);" > 
+ <input class="bginput" accesskey="r" type="reset" name="" value=" 重置 " >
+
+</td></tr>
+</table>
+
+</form>
