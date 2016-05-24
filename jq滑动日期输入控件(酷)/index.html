@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>html5日历控件制作多皮肤动画日历选择器特效</title>
+<meta name="keywords" content="html5动画,日历控件" />
+<meta name="description" content="html5日历控件制作多皮肤动画日历选择器特效。" />
+
+<link rel="stylesheet" href="datedropper.css" />
+
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript" src="datedropper.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('#init').dateDropper({color:'#f87a54',animation:'dropdown',placeholder:'TEXT FIELD'});
+	$('#demo1').dateDropper({color:'#f87a54',animation:'dropdown',placeholder:'Birthday',lock:'to'});
+	$('#demo2').dateDropper({lang:'it',placeholder:'Scegli il giorno',format:'d-m-y',minYear:2014,maxYear:2020,color:'#fad763',animate_current:false,lock:'from',years_multiple:2});
+	$('#demo3').dateDropper({format:'m',placeholder:'mm',color:'#66c8ba',animation:'bounce', lang:'fr'});
+	$('#demo4').dateDropper({format:'Y',minYear:2010,maxYear:2030,placeholder:'yyyy',color:'#66c8ba',animation:'bounce'});
+	$('#color1').dateDropper({bgColor:'#faf7f4',borderColor:'#feac92',textColor:'#9ed7db',color:'#feac92'});
+	$('#color2').dateDropper({bgColor:'#FCBB53',borderColor:'#EC6557',textColor:'#EC6557',color:'#EC6557'});
+	$('#color3').dateDropper({bgColor:'#FFFCF3',borderColor:'#5CB1BB',textColor:'#5CB1BB',color:'#9ED7D8'});
+	$('#color4').dateDropper({bgColor:'#BF9D73',borderColor:'#73454D',textColor:'#F2E1D8',color:'#73454D'});
+});
+</script>
+
+<style>
+*{margin:0;padding:0;}
+body{font-family:Arial;}
+input{display:block;width:200px;height:20px;line-height:20px;padding:8px 10px;border:1px solid #999;margin:20px;border-radius:3px;}
+</style>
+
+</head>
+<body>
+
+<center>
+	<input type="text" id="init" />
+
+	<input type="text" id="demo1" />
+
+	<input type="text" id="demo2" />
+
+	<input type="text" id="demo3" />
+
+	<input type="text" id="demo4" />
+
+	<input type="text" id="color1" />
+
+	<input type="text" id="color2" />
+
+	<input type="text" id="color3" />
+
+	<input type="text" id="color4" />
+</center>
+
+</body>
+</html>
