@@ -1,0 +1,120 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+* {
+	margin: 0;
+	padding: 0;
+	border: none;
+	zoom: 1;
+}
+ul li {
+	list-style: none;
+}
+.box {
+	width: 52px;
+	height: 162px;
+	border: 1px solid #ccc;
+	margin-left: 30%;
+	margin-top: 10%;
+	position: relative
+}
+.box ul li {
+	width: 48px;
+	display: block;
+	height: 50px;
+	padding: 2px;
+	overflow: hidden
+}
+.weixin {
+	background: url(elevator.png) no-repeat;
+	background-position: 0 87%;
+	-webkit-transition: all .3s;
+	-moz-transition: all .3s;
+	-ms-transition: all .3s;
+	-o-transition: all .3s;
+}
+.weixin:hover {
+	background-position: 0 93%
+}
+.weixin:hover .weixin-logo {
+	width: 170px;
+	height: 204px;
+}
+.idea {
+	background: url(elevator.png) no-repeat;
+	background-position: 0 43%;
+	-webkit-transition: all .3s;
+	-moz-transition: all .3s;
+	-ms-transition: all .3s;
+	-o-transition: all .3s;
+}
+.idea:hover {
+	background-position: 0 49%;
+}
+.app {
+	background: url(elevator.png) no-repeat;
+	background-position: 0 55%;
+	-webkit-transition: all .3s;
+	-moz-transition: all .3s;
+	-ms-transition: all .3s;
+	-o-transition: all .3s;
+}
+.app:hover {
+	background-position: 0 61%;
+}
+.app:hover .app-logo {
+	width: 170px;
+	height: 185px;
+	-webkit-transform: rotate(360deg);
+	-moz-transform: rotate(360deg);
+	-ms-transform: rotate(360deg);
+	-o-transform: rotate(360deg);
+}
+.weixin-logo {
+	background: url(elevator.png) no-repeat;
+	background-position: 0 0;
+	width: 0px;
+	height: 0px;
+	overflow: hidden;
+	position: absolute;
+	top: -154px;
+	left: -171px;
+	-webkit-transition: all .3s;
+	-moz-transition: all .3s;
+	-ms-transition: all .3s;
+	-o-transition: all .3s;
+}
+.app-logo {
+	background: url(elevator.png) no-repeat;
+	background-position: 0 26%;
+	width: 0px;
+	height: 0px;
+	overflow: hidden;
+	position: absolute;
+	top: -18px;
+	left: -171px;
+	-webkit-transition: all .3s;
+	-moz-transition: all .3s;
+	-ms-transition: all .3s;
+	-o-transition: all .3s;
+}
+</style>
+<title>无标题文档</title>
+</head>
+
+<body>
+<div class="box">
+  <ul>
+    <li class="weixin">
+      <div class="weixin-logo"></div>
+    </li>
+    <li class="idea"></li>
+    <li class="app">
+      <div class="app-logo"></div>
+    </li>
+  </ul>
+</div>
+</body>
+</html>
