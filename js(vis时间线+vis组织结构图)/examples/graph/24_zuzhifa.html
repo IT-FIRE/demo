@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>事件详情</title>
+  <style type="text/css">
+    body {
+      font: 10pt sans;
+    }
+    #mygraph {
+      width: 1000px;
+      height: 600px;
+      border: 1px solid lightgray;
+    }
+  </style>
+
+  <script type="text/javascript" src="../../dist/vis.js"></script>
+
+  <script type="text/javascript">
+    // Called on page load
+    function draw() {
+      var nodes = [
+        {id: 1, label: '浙江省H7N9突发公共卫生事件(模拟)8\n20140605\n突发公共卫生事件',color: 'orange'},
+        {id: 2, label: '定性定级\n20102020III级'},
+        {id: 3, label: '事件研判\n'},
+        {id: 4, label: '卫生行政报告'},
+        {id: 5, label: '卫生防疫报告'},
+        {id: 6, label: '医疗救治报告'},
+        {id: 7, label: '院前急救报告'},
+        {id: 8, label: '卫生监督报告'},
+        {id: 9, label: '卫生监督报告'},
+        {id: 10, label: '卫生监督报告'},
+
+      ];
+      var edges = [
+        {from: 1, to: 2, value: 6,style: 'dash-line', dash: {length: 50, gap: 20}},
+        {from: 1, to: 3, value: 6,style: 'dash-line', dash: {length: 50, gap: 20}},
+        {from: 1, to: 4, value: 6,style: 'dash-line', dash: {length: 50, gap: 20}},
+        {from: 1, to: 5, value: 6,style: 'dash-line', dash: {length: 50, gap: 20}},
+        {from: 1, to: 6, value: 6,style: 'dash-line', dash: {length: 150, gap: 20}},
+        {from: 1, to: 7, value: 6,style: 'dash-line', dash: {length: 150, gap: 20}},
+        {from: 1, to: 8, value: 6,style: 'dash-line', dash: {length: 150, gap: 20}},
+        {from: 1, to: 9, value: 6,style: 'dash-line', dash: {length: 50, gap: 20}},
+        {from: 1, to: 10, value: 6,style: 'dash-line', dash: {length: 50, gap: 20}}
+      ];
+
+      // create the graph
+      var container = document.getElementById('mygraph');
+      var data = {
+        nodes: nodes,
+        edges: edges
+      };
+      var options = {
+        nodes: {
+          shape: 'box'
+        },
+        edges: {
+          length: 180
+        },
+        stabilize: false
+      };
+      var graph = new vis.Graph(container, data, options);
+      graph.on('select', function(params) {
+        alert('Selection: ' + params.nodes);
+      });
+    }
+  </script>
+</head>
+
+<body onload="draw();">
+<p>
+  This example shows the different options for dashed lines.
+</p>
+
+<div id="mygraph"></div>
+</body>
+</html>

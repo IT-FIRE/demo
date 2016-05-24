@@ -1,0 +1,99 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Timeline | Group example</title>
+  <style>
+    body, html {
+      font-family: arial, sans-serif;
+      font-size: 11pt;
+    }
+
+    #visualization {
+      box-sizing: border-box;
+      width: 100%;
+      height: 500px;
+    }
+  </style>
+
+  <!-- note: moment.js must be loaded before vis.js, else vis.js uses its embedded version of moment.js -->
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.3.1/moment.min.js"></script>
+
+  <script src="../../dist/vis.js"></script>
+  <link href="../../dist/vis.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<p>
+  This example demonstrate using groups. Note that a DataSet is used for both
+  items and groups, allowing to dynamically add, update or remove both items
+  and groups via the DataSet.
+</p>
+<div id="visualization"></div>
+
+<script>
+  var now = moment().minutes(0).seconds(0).milliseconds(0);
+  var groupCount = 3;
+  var itemCount = 20;
+
+  // create a data set with groups
+  var names = ['杭州', '绍兴', '嘉兴', '湖州'];
+  var groups = new vis.DataSet();
+  for (var g = 0; g < groupCount; g++) {
+    groups.add({id: g, content: names[g]});
+  }
+
+  // create a dataset with items
+  var items = new vis.DataSet();
+  var sd = new Date("2014-03-15");
+  for (var i = 0; i < itemCount; i++) {
+    var start =  new Date(Date.parse(sd) + (86400000 * i));   
+    var group = 0;
+    items.add({
+      id: i,
+      group: group,
+      content: 'item ' + i +
+          '<a href="http://visjs.org?lsh="'+ i +' target="_blank">'+ names[group]+'</a>',
+      start: start
+    });
+  }
+
+  for (var i = 0; i < itemCount; i++) {
+    var start =  new Date(Date.parse(sd) + (86400000 * i));   
+    var group = 1;
+    items.add({
+      id: 100+i,
+      group: group,
+      content: 'item ' + i +
+          '<a href="http://visjs.org?lsh="'+ i +' target="_blank">'+ names[group]+'</a>'+'<span style="color:red;">(' + "死亡" + ')</span>',
+      start: start
+    });
+  }
+
+  for (var i = 0; i < itemCount; i++) {
+    var start =  new Date(Date.parse(sd) + (86400000 * i));   
+    var group = 2;
+    items.add({
+      id: 1000+i,
+      group: group,
+      content: 'item ' + i +
+          '<a href="http://visjs.org?lsh="'+ i +' target="_blank">'+ names[group]+'</a>',
+      start: start
+    });
+  }
+
+  // create visualization
+  var container = document.getElementById('visualization');
+  var options = {
+    groupOrder: 'content',
+    start: '2014-03-14',
+    height: '100%'
+  };
+
+  var timeline = new vis.Timeline(container);
+  timeline.setOptions(options);
+  timeline.setGroups(groups);
+  timeline.setItems(items);
+
+</script>
+</body>
+</html>
